@@ -13,4 +13,14 @@ export class Board {
     let result = this.board.map(row => row.join("")).join("\n")
     return result + "\n";
   }
+
+  drop(block) {
+    if (this.canDrop()) {
+      this.board[0][Math.floor(this.width / 2)] = block;
+    } 
+  }
+
+  canDrop() {
+    return this.board[1][Math.floor(this.width / 2)] === ".";
+  }
 }
