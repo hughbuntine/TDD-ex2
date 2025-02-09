@@ -2,11 +2,13 @@ export class Board {
   width;
   height;
   window;
+  hasFallingBlock;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.window = new Array(this.height).fill(null).map(() => new Array(this.width).fill("."));
+    this.hasFallingBlock = false;
   }
 
   toString() {
@@ -19,7 +21,7 @@ export class Board {
   }
 
   drop(block) {
-    if (!this.somethingFalling()){this.window[0][Math.floor(this.width / 2)] = block;} // If there is nothing falling, drop the block
+    if (!this.hasFalling()){this.window[0][Math.floor(this.width / 2)] = block; this.hasFallingBlock = true;} // If there is nothing falling, drop the block
     else {throw new Error("already falling");} // If there is something falling, throw an error
   }
 
@@ -32,10 +34,7 @@ export class Board {
     }
   }
 
-  somethingFalling() {
-    for (let col = 0; col < this.width; col++) {
-      if (this.window[0][col] !== ".") {return true;}
-    }
-    return false;
+  hasFalling() {
+    return this.hasFallingBlock;
   }
 }
