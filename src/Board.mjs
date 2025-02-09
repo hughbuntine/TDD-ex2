@@ -21,4 +21,13 @@ export class Board {
   drop(block) {
     this.window[0][Math.floor(this.width / 2)] = block;
   }
+
+  tick() {
+    for (let row = this.height - 1; row >= 0; row--) {
+      for (let col = 0; col < this.width; col++) {
+        if (row === 0) {this.window[row][col] = "."; continue;} // top row, fresh ......
+        this.window[row][col] = this.window[row - 1][col]; // move down
+      }
+    }
+  }
 }
