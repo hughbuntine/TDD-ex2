@@ -18,6 +18,9 @@ export class Board {
     if (this.canDrop()) {
       this.board[0][Math.floor(this.width / 2)] = block;
     } 
+    else {
+      throw new Error("DEAD I THINK");
+    }
   }
 
   canDrop() {
