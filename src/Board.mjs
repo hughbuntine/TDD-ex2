@@ -14,7 +14,11 @@ export class Board {
     for (let row of this.window) {
       result += row.join("") + "\n";
     }
-    
+
     return result;
+  }
+
+  drop(block) {
+    this.window[0][Math.floor(this.width / 2)] = block;
   }
 }
