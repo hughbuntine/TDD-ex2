@@ -19,7 +19,8 @@ export class Board {
   }
 
   drop(block) {
-    this.window[0][Math.floor(this.width / 2)] = block;
+    if (!this.somethingFalling()){this.window[0][Math.floor(this.width / 2)] = block;} // If there is nothing falling, drop the block
+    else {throw new Error("already falling");} // If there is something falling, throw an error
   }
 
   tick() {
@@ -29,5 +30,12 @@ export class Board {
         this.window[row][col] = this.window[row - 1][col]; // move down
       }
     }
+  }
+
+  somethingFalling() {
+    for (let col = 0; col < this.width; col++) {
+      if (this.window[0][col] !== ".") {return true;}
+    }
+    return false;
   }
 }
