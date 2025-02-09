@@ -3,12 +3,14 @@ export class Board {
   height;
   window;
   hasFallingBlock;
+  fallingBlockCoords
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.window = new Array(this.height).fill(null).map(() => new Array(this.width).fill("."));
     this.hasFallingBlock = false;
+    this.fallingBlockCoords = [-1,-1]
   }
 
   toString() {
@@ -21,7 +23,9 @@ export class Board {
   }
 
   drop(block) {
-    if (!this.hasFalling()){this.window[0][Math.floor(this.width / 2)] = block; this.hasFallingBlock = true;} // If there is nothing falling, drop the block
+    if (!this.hasFalling()){ // If there is nothing falling, drop the block
+      this.window[0][Math.floor(this.width / 2)] = block; this.hasFallingBlock = true;
+  } 
     else {throw new Error("already falling");} // If there is something falling, throw an error
   }
 
@@ -29,7 +33,10 @@ export class Board {
     for (let row = this.height - 1; row >= 0; row--) {
       for (let col = 0; col < this.width; col++) {
         if (row === 0) {this.window[row][col] = "."; continue;} // top row, fresh ......
-        else if (row === this.height - 1 && this.window[row][col] != '.'){this.hasFallingBlock = false; continue;} // bottom row, block has reached the bottom
+        else if (row === this.height - 1 && this.window[row][col] != '.'){
+          this.hasFallingBlock = false; 
+          continue;
+        } // bottom row, block has reached the bottom
         else {this.window[row][col] = this.window[row - 1][col];} // move down
       }
     }
