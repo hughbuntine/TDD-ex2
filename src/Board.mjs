@@ -24,7 +24,9 @@ export class Board {
 
   drop(block) {
     if (!this.hasFalling()){ // If there is nothing falling, drop the block
-      this.window[0][Math.floor(this.width / 2)] = block; this.hasFallingBlock = true;
+      this.window[0][Math.floor(this.width / 2)] = block; 
+      this.hasFallingBlock = true;
+      this.fallingBlockCoords = [0, Math.floor(this.width / 2)];
   } 
     else {throw new Error("already falling");} // If there is something falling, throw an error
   }
@@ -44,5 +46,10 @@ export class Board {
 
   hasFalling() {
     return this.hasFallingBlock;
+  }
+
+  stopFalling() {
+    this.hasFallingBlock = false;
+    this.fallingBlockCoords = [-1,-1];
   }
 }
