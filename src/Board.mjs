@@ -29,7 +29,8 @@ export class Board {
     for (let row = this.height - 1; row >= 0; row--) {
       for (let col = 0; col < this.width; col++) {
         if (row === 0) {this.window[row][col] = "."; continue;} // top row, fresh ......
-        this.window[row][col] = this.window[row - 1][col]; // move down
+        else if (row === this.height - 1 && this.window[row][col] != '.'){this.hasFallingBlock = false; continue;} // bottom row, block has reached the bottom
+        else {this.window[row][col] = this.window[row - 1][col];} // move down
       }
     }
   }
