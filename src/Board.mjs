@@ -22,12 +22,12 @@ export class Board {
       this.fallingBlock = {x: Math.floor(this.width / 2), y: 0, value: block};
     } 
     else {
-      throw new Error("DEAD I THINK");
+      throw new Error("already falling");
     }
   }
 
   canDrop() {
-    return this.board[1][Math.floor(this.width / 2)] === ".";
+    return this.board[1][Math.floor(this.width / 2)] === "." && !this.hasFalling();
   }
 
   tick() {
