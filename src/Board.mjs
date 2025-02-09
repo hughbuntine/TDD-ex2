@@ -30,7 +30,13 @@ export class Board {
     return this.board[1][Math.floor(this.width / 2)] === ".";
   }
 
-
+  tick() {
+    if (this.hasFalling()) {
+      this.board[this.fallingBlock.y][this.fallingBlock.x] = ".";
+      this.fallingBlock.y += 1;
+      this.board[this.fallingBlock.y][this.fallingBlock.x] = this.fallingBlock.value;
+    }
+  }
 
   hasFalling() {
     return this.fallingBlock !== null;
