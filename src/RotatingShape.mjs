@@ -22,4 +22,5 @@ export class RotatingShape {
     rotateLeft () {
         return this.rotateRight().rotateRight().rotateRight();
     }
+
 }
