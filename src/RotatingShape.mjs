@@ -1,5 +1,7 @@
 export class RotatingShape {
-    shape = [[]];
+    constructor(shape = []) {
+        this.shape = shape;
+    }
 
     static fromString (shapeString) {
         const shape = new RotatingShape();
