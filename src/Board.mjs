@@ -32,9 +32,14 @@ export class Board {
 
   tick() {
     if (this.hasFalling()) {
-      this.board[this.fallingBlock.y][this.fallingBlock.x] = ".";
-      this.fallingBlock.y += 1;
-      this.board[this.fallingBlock.y][this.fallingBlock.x] = this.fallingBlock.value;
+      if (this.fallingBlock.y === this.height - 1) { // reached the bottom
+        this.fallingBlock = null;
+      }
+      else { // move down
+        this.board[this.fallingBlock.y][this.fallingBlock.x] = ".";
+        this.fallingBlock.y += 1;
+        this.board[this.fallingBlock.y][this.fallingBlock.x] = this.fallingBlock.value;
+      }
     }
   }
 
