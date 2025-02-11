@@ -18,4 +18,8 @@ export class RotatingShape {
         rotated.shape = this.shape[0].map((_, i) => this.shape.map(row => row[i]).reverse());
         return rotated;
     }
+
+    rotateLeft () {
+        return this.rotateRight().rotateRight().rotateRight();
+    }
 }
