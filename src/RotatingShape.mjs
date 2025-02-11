@@ -13,14 +13,21 @@ export class RotatingShape {
         return this.shape.map(row => row.join('')).join('\n') + "\n";
     }
 
-    rotateRight () {
+    rotateRightHelper () {
         const rotated = new RotatingShape();
         rotated.shape = this.shape[0].map((_, i) => this.shape.map(row => row[i]).reverse());
         return rotated;
     }
 
-    rotateLeft () {
+    rotateLeftHelper () {
         return this.rotateRight().rotateRight().rotateRight();
     }
 
+    rotateRight () {
+        return this.rotateRightHelper();
+    }
+
+    rotateLeft () {
+        return this.rotateLeftHelper();
+    }
 }
