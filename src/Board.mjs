@@ -35,6 +35,9 @@ export class Board {
       if (this.fallingBlock.y === this.height - 1) { // reached the bottom
         this.fallingBlock = null;
       }
+      else if (this.board[this.fallingBlock.y + 1][this.fallingBlock.x] !== ".") { // reached another block
+        this.fallingBlock = null;
+      }
       else { // move down
         this.board[this.fallingBlock.y][this.fallingBlock.x] = ".";
         this.fallingBlock.y += 1;
