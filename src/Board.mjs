@@ -27,7 +27,7 @@ export class Board {
   }
 
   canDrop() {
-    return this.board[1][Math.floor(this.width / 2)] === "." && !this.hasFalling();
+    return !this.hasFalling();
   }
 
   tick() {
