@@ -27,6 +27,9 @@ export class RotatingShape {
         if (this.shape[0].join('') === '..I..') { // I CASE
             return this.rotateLeftHelper();
         }
+        else if (this.shape[0].join('') === '.OO') { // O CASE
+            return this;
+        }
         else { // DEFAULT CASE
             return this.rotateRightHelper();
         }
@@ -35,6 +38,9 @@ export class RotatingShape {
     rotateLeft () {
         if (this.shape[2].join('') === 'IIII.') { // I CASE
             return this.rotateRightHelper();
+        }
+        else if (this.shape[0].join('') === '.OO') { // O CASE
+            return this;
         }
         else { // DEFAULT CASE
             return this.rotateLeftHelper();
