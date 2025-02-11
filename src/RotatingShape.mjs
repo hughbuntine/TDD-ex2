@@ -1,14 +1,15 @@
-class RotatingShape {
-    constructor() {
-        // Add constructor logic here
-    }
+export class RotatingShape {
+    shape = [[]];
 
-    fromString (shapeString) {
-        // Add logic here
+    static fromString (shapeString) {
+        const shape = new RotatingShape();
+        shape.shape = shapeString.split('\n').map(row => row.split(''));
+        return shape;
     }
 
     toString () {
-        // Add logic here
+        let returnShape = this.shape.map(row => row.join('')).join('\n').replaceAll(' ', '') + "\n";
+
+        return returnShape;
     }
 }
-export default RotatingShape;
