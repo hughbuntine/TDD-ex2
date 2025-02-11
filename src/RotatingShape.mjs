@@ -20,14 +20,22 @@ export class RotatingShape {
     }
 
     rotateLeftHelper () {
-        return this.rotateRight().rotateRight().rotateRight();
+        return this.rotateRightHelper().rotateRightHelper().rotateRightHelper();
     }
 
     rotateRight () {
-        if (this === RotatingShape.I_SHAPE) {
+        if (this.shape.toString() === 
+        `.....
+        .....
+        IIII.
+        .....
+        .....`) {
+            return this.rotateLeftHelper();
+        }
+        else {
             return this.rotateRightHelper();
         }
-        return this.rotateRightHelper();
+        
     }
 
     rotateLeft () {
