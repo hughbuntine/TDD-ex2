@@ -10,8 +10,6 @@ export class RotatingShape {
     }
 
     toString () {
-        let returnShape = this.shape.map(row => row.join('')).join('\n').replaceAll(' ', '') + "\n";
-
-        return returnShape;
+        return this.shape.map(row => row.join('')).join('\n').replaceAll(' ', '') + "\n";
     }
 }
