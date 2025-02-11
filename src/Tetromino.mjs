@@ -20,4 +20,12 @@ export class Tetromino {
          .OO
          ...`
     );  
+
+    rotateRight () {
+        return this;
+    }
+
+    rotateLeft () {
+        return this.rotateLeftHelper();
+    }
 }

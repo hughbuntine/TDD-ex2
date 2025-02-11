@@ -24,6 +24,9 @@ export class RotatingShape {
     }
 
     rotateRight () {
+        if (this === RotatingShape.I_SHAPE) {
+            return this.rotateRightHelper();
+        }
         return this.rotateRightHelper();
     }
 
