@@ -25,10 +25,15 @@ export class RotatingShape {
 
     rotateRight () {
         return this.rotateRightHelper();
-        
     }
 
     rotateLeft () {
-        return this.rotateLeftHelper();
+        if (this.shape[2].join('') === 'IIII.') { // I CASE
+            return this.rotateRightHelper();
+        }
+        else {
+            return this.rotateLeftHelper();
+        }
+        
     }
 }
