@@ -24,16 +24,20 @@ export class RotatingShape {
     }
 
     rotateRight () {
-        return this.rotateRightHelper();
+        if (this.shape[0].join('') === '..I..') { // I CASE
+            return this.rotateLeftHelper();
+        }
+        else { // DEFAULT CASE
+            return this.rotateRightHelper();
+        }
     }
 
     rotateLeft () {
         if (this.shape[2].join('') === 'IIII.') { // I CASE
             return this.rotateRightHelper();
         }
-        else {
+        else { // DEFAULT CASE
             return this.rotateLeftHelper();
         }
-        
     }
 }
