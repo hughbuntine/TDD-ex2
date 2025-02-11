@@ -24,17 +24,7 @@ export class RotatingShape {
     }
 
     rotateRight () {
-        if (this.shape.toString() === 
-        `.....
-        .....
-        IIII.
-        .....
-        .....`) {
-            return this.rotateLeftHelper();
-        }
-        else {
-            return this.rotateRightHelper();
-        }
+        return this.rotateRightHelper();
         
     }
 
