@@ -136,5 +136,57 @@ describe("Moving tetrominoes", () => {
         );
     });
 
+    test("it cannot be moved left into a filled cell", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.drop(Tetromino.T_SHAPE);
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveRight();
+        board.moveRight();
+
+        expect(board.toString()).to.equalShape(
+            `..........
+             ..........
+             ..........
+             .....T....
+             ....TTTT..
+             ......TTT.`
+        );
+    });
+
+    test("it cannot be moved down through other blocks (will stop falling)", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.drop(Tetromino.T_SHAPE);
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.drop(Tetromino.T_SHAPE);
+
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ...TTT....
+             ....T.....
+             ...TTT....
+             ....T.....
+             ...TTT....`
+        );
+
+    }
+    )
+
 });
 

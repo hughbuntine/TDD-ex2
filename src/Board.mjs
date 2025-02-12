@@ -31,9 +31,12 @@ export class Board {
       // Place the block
       for (let i = 0; i < blockSize; i++) {
           for (let j = 0; j < blockSize; j++){
+            if (block.shape[i][j] !== ".") {
               let iPlacement = i; // Adjusted row placement
               let jPlacement = Math.floor((this.width - blockSize) / 2) + j; // Adjusted column placement
               this.board[iPlacement][jPlacement] = block.shape[i][j]
+            }
+              
           }
       }
 
