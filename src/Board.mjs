@@ -38,8 +38,9 @@ export class Board {
       }
 
       // Set the block attributes
-      this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yTop: blockSize - 1, value: block, size: blockSize, type: this.hasChar(block.shape)};
+      this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yTop: 0, value: block, size: blockSize, type: this.hasChar(block.shape)};
       console.log("drop " + this.fallingBlock.type);
+      console.log(this.toString());
     } 
     else {
       throw new Error("already falling");
@@ -52,18 +53,20 @@ export class Board {
 
   tick() {
     if (this.hasFalling()) {
-
       if (this.atBottom()) { // reached the bottom
         console.log(this.fallingBlock.type + " reached the bottom");
         this.fallingBlock = null;
+        console.log(this.toString());
       }
       else if (this.onAnotherBlock()) { // reached another block
         console.log(this.fallingBlock.type + " reached another block");
         this.fallingBlock = null;
+        console.log(this.toString());
       }
       else { // move down
         console.log(this.fallingBlock.type + " moved down");
         this.moveDown();
+        console.log(this.toString());
     }
     
     }
@@ -111,9 +114,11 @@ export class Board {
     for (let i = blockSize - 1; i >= 0; i--) {
       for (let j = 0; j < blockSize; j++) {
         if (shape[i][j] !== '.') { // Check if this cell is part of the block
-          let cellBelow = this.board[this.fallingBlock.yTop + i + 1][this.fallingBlock.xLeft + j];
-          if (cellBelow !== '.') {
-            return true; // The block is on another block
+          if (i >= blockSize - 1 || shape[i + 1][j] === '.') { // bottom of block or a . under it
+            let cellBelow = this.board[this.fallingBlock.yTop + i + 1][this.fallingBlock.xLeft + j];
+            if (cellBelow !== '.') {
+              return true; // The block is on another block
+            }
           }
         }
       }
@@ -138,9 +143,8 @@ export class Board {
         }
       }
     }
-
     // Update the falling block's position
     this.fallingBlock.yTop++;
-
   }
+  
 }
