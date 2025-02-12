@@ -125,6 +125,17 @@ export class Board {
   }
 
   moveDown() {
+    if (this.atBottom()){
+      console.log("cannot move "+ this.fallingBlock.type + " down");
+      console.log(this.toString());
+      return;
+    }
+    else if (this.onAnotherBlock()){
+      console.log("cannot move "+ this.fallingBlock.type + " down");
+      console.log(this.toString());
+      return;
+    }
+
     const blockSize = this.fallingBlock.size;
     const shape = this.fallingBlock.value.shape;
     

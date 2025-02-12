@@ -111,5 +111,7 @@ describe("Moving tetrominoes", () => {
              ...TTT....`
         );
 
+    });
+
 });
 
