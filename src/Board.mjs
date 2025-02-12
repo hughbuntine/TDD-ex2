@@ -180,6 +180,8 @@ export class Board {
 
   moveRight() {
     if (!this.canMoveRight()) {
+      console.log("cannot move "+ this.fallingBlock.type + " right");
+      console.log(this.toString());
       return;
     }
 
