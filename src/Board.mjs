@@ -39,6 +39,7 @@ export class Board {
 
       // Set the block attributes
       this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yTop: blockSize - 1, value: block, size: blockSize, type: this.hasChar(block.shape)};
+      console.log("drop " + this.fallingBlock.type);
     } 
     else {
       throw new Error("already falling");
@@ -53,15 +54,15 @@ export class Board {
     if (this.hasFalling()) {
 
       if (this.atBottom()) { // reached the bottom
-        console.log("reached the bottom");
+        console.log(this.fallingBlock.type + " reached the bottom");
         this.fallingBlock = null;
       }
       else if (this.onAnotherBlock()) { // reached another block
-        console.log("reached another block");
+        console.log(this.fallingBlock.type + " reached another block");
         this.fallingBlock = null;
       }
       else { // move down
-        console.log("move down");
+        console.log(this.fallingBlock.type + " moved down");
         this.moveDown();
     }
     
@@ -140,6 +141,6 @@ export class Board {
 
     // Update the falling block's position
     this.fallingBlock.yTop++;
-    
+
   }
 }
