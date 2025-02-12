@@ -64,9 +64,7 @@ export class Board {
         console.log(this.toString());
       }
       else { // move down
-        console.log(this.fallingBlock.type + " moved down");
         this.moveDown();
-        console.log(this.toString());
     }
     
     }
@@ -145,9 +143,12 @@ export class Board {
     }
     // Update the falling block's position
     this.fallingBlock.yTop++;
+
+    console.log(this.fallingBlock.type + " moved down");
+    console.log(this.toString());
   }
   
-  moveLeft(){
+  moveLeft() {
     const blockSize = this.fallingBlock.size;
     const shape = this.fallingBlock.value.shape;
     
@@ -171,7 +172,7 @@ export class Board {
     console.log(this.toString());
   }
 
-  moveRight(){
+  moveRight() {
     const blockSize = this.fallingBlock.size;
     const shape = this.fallingBlock.value.shape;
     
