@@ -112,6 +112,12 @@ export class Board {
   }
 
   moveDown() {
+    if (!this.hasFalling()) {
+      console.log("no block to move down");
+      console.log(this.toString());
+      return;
+    }
+
     if (this.atBottom()){
       console.log("cannot move "+ this.fallingBlock.type + " down");
       console.log(this.toString());
@@ -149,6 +155,12 @@ export class Board {
   }
   
   moveLeft() {
+    if (!this.hasFalling()) {
+      console.log("no block to move left");
+      console.log(this.toString());
+      return;
+    }
+
     if (!this.canMoveLeft()) {
       console.log("cannot move "+ this.fallingBlock.type + " left");
       console.log(this.toString());
@@ -179,6 +191,12 @@ export class Board {
   }
 
   moveRight() {
+    if (!this.hasFalling()) {
+      console.log("no block to move right");
+      console.log(this.toString());
+      return;
+    }
+
     if (!this.canMoveRight()) {
       console.log("cannot move "+ this.fallingBlock.type + " right");
       console.log(this.toString());
