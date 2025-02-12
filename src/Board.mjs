@@ -38,7 +38,7 @@ export class Board {
       }
 
       // Set the block attributes
-      this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yBot: blockSize - 1, value: block, size: blockSize};
+      this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yBot: blockSize - 1, value: block, size: blockSize, type: this.hasChar(block.shape)};
     } 
     else {
       throw new Error("already falling");
@@ -51,21 +51,37 @@ export class Board {
 
   tick() {
     if (this.hasFalling()) {
+
       if (this.fallingBlock.yBot === this.height - 1) { // reached the bottom
+        console.log("reached the bottom");
         this.fallingBlock = null;
       }
+      
       else if (this.board[this.fallingBlock.yBot + 1][this.fallingBlock.xLeft] !== ".") { // reached another block
+        console.log("reached another block");
         this.fallingBlock = null;
       }
       else { // move down
-        this.board[this.fallingBlock.yBot][this.fallingBlock.xLeft] = ".";
-        this.fallingBlock.yBot += 1;
-        this.board[this.fallingBlock.yBot][this.fallingBlock.xLeft] = this.fallingBlock.value.shape[this.fallingBlock.size - 1][0];
-      }
+        console.log("trying to move down");
+    
+       
+    }
+    
     }
   }
 
   hasFalling() {
     return this.fallingBlock !== null;
+  }
+
+  hasChar(shape){
+    for (let i = 0; i < shape.length; i++) {
+        for (let j = 0; j < shape.length; j++) {
+            if (shape[i][j] !== ".") {
+                return shape[i][j];
+            }
+        }
+    }
+    return false;
   }
 }
