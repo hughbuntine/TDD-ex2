@@ -166,5 +166,8 @@ export class Board {
     }
     // Update the falling block's position
     this.fallingBlock.xLeft--;
+
+    console.log("move " + this.fallingBlock.type + " left");
+    console.log(this.toString());
   }
 }
