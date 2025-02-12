@@ -38,7 +38,7 @@ export class Board {
       }
 
       // Set the block attributes
-      this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yBot: blockSize - 1, value: block, size: blockSize, type: this.hasChar(block.shape)};
+      this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yTop: blockSize - 1, value: block, size: blockSize, type: this.hasChar(block.shape)};
     } 
     else {
       throw new Error("already falling");
@@ -52,19 +52,17 @@ export class Board {
   tick() {
     if (this.hasFalling()) {
 
-      if (this.fallingBlock.yBot === this.height - 1) { // reached the bottom
+      if (this.atBottom()) { // reached the bottom
         console.log("reached the bottom");
         this.fallingBlock = null;
       }
-      
-      else if (this.board[this.fallingBlock.yBot + 1][this.fallingBlock.xLeft] !== ".") { // reached another block
+      else if (this.onAnotherBlock()) { // reached another block
         console.log("reached another block");
         this.fallingBlock = null;
       }
       else { // move down
-        console.log("trying to move down");
-    
-       
+        console.log("move down");
+        this.moveDown();
     }
     
     }
@@ -83,5 +81,65 @@ export class Board {
         }
     }
     return false;
+  }
+
+  atBottom() {
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          // Check if this cell is in the last row or if the row below it is out of bounds
+          const boardRow = this.fallingBlock.yTop + i + 1;
+          if (boardRow >= this.height) {
+            return true; // The block is at the bottom
+          }
+        }
+      }
+    }
+    return false; // The block can still move down
+  }
+  
+  onAnotherBlock() {
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          let cellBelow = this.board[this.fallingBlock.yTop + i + 1][this.fallingBlock.xLeft + j];
+          if (cellBelow !== '.') {
+            return true; // The block is on another block
+          }
+        }
+      }
+    }
+    return false; // The block can still move down
+  }
+
+  moveDown() {
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          
+          // Clear the cell
+          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+          
+          // Move the cell down
+          this.board[this.fallingBlock.yTop + i + 1][this.fallingBlock.xLeft + j] = shape[i][j];
+        }
+      }
+    }
+
+    // Update the falling block's position
+    this.fallingBlock.yTop++;
+    
   }
 }
