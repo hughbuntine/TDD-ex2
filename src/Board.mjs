@@ -149,12 +149,11 @@ export class Board {
   }
   
   moveLeft() {
-    if (this.fallingBlock.xLeft === 0) {
-      console.log("tried to move left but the block " + this.fallingBlock.type + " is at the left");
+    if (!this.canMoveLeft()) {
+      console.log("cannot move "+ this.fallingBlock.type + " left");
       console.log(this.toString());
-      return; // The block is already at the left edge
+      return;
     }
-
     const blockSize = this.fallingBlock.size;
     const shape = this.fallingBlock.value.shape;
     
@@ -163,11 +162,12 @@ export class Board {
       for (let j = 0; j < blockSize; j++) {
         if (shape[i][j] !== '.') { // Check if this cell is part of the block
           
-          // Clear the cell
-          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+            // Clear the cell
+            this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+            
+            // Move the cell left
+            this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j - 1] = shape[i][j];
           
-          // Move the cell left
-          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j - 1] = shape[i][j];
         }
       }
     }
@@ -179,6 +179,10 @@ export class Board {
   }
 
   moveRight() {
+    if (!this.canMoveRight()) {
+      return;
+    }
+
     const blockSize = this.fallingBlock.size;
     const shape = this.fallingBlock.value.shape;
     
@@ -187,11 +191,12 @@ export class Board {
       for (let j = blockSize - 1; j >= 0; j--) {
         if (shape[i][j] !== '.') { // Check if this cell is part of the block
           
-          // Clear the cell
-          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+            // Clear the cell
+            this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+            
+            // Move the cell right
+            this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j + 1] = shape[i][j];
           
-          // Move the cell right
-          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j + 1] = shape[i][j];
         }
       }
     }
@@ -201,4 +206,45 @@ export class Board {
     console.log("move " + this.fallingBlock.type + " right");
     console.log(this.toString());
   }
+
+  canMoveLeft(){
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          if (j === 0 || shape[i][j - 1] === '.') { // left edge of block or a . to the left
+            let cellLeft = this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j - 1];
+            if (cellLeft !== '.') {
+              return false; // The block cannot move left
+            }
+          }
+        }
+      }
+    }
+    return true; // The block can move left
+  }
+
+  canMoveRight(){
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = blockSize - 1; j >= 0; j--) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          if (j === blockSize - 1 || shape[i][j + 1] === '.') { // right edge of block or a . to the right
+            let cellRight = this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j + 1];
+            if (cellRight !== '.') {
+              return false; // The block cannot move right
+            }
+          }
+        }
+      }
+    }
+    return true; // The block can move right
+  }
+
 }
