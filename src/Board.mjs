@@ -19,7 +19,7 @@ export class Board {
   drop(block) {
     if (this.canDrop()) {
       this.board[0][Math.floor(this.width / 2)] = block;
-      this.fallingBlock = {x: Math.floor(this.width / 2), y: 0, value: block};
+      this.fallingBlock = {xLeft: Math.floor(this.width / 2), yBot: 0, value: block};
     } 
     else {
       throw new Error("already falling");
@@ -32,16 +32,16 @@ export class Board {
 
   tick() {
     if (this.hasFalling()) {
-      if (this.fallingBlock.y === this.height - 1) { // reached the bottom
+      if (this.fallingBlock.yBot === this.height - 1) { // reached the bottom
         this.fallingBlock = null;
       }
-      else if (this.board[this.fallingBlock.y + 1][this.fallingBlock.x] !== ".") { // reached another block
+      else if (this.board[this.fallingBlock.yBot + 1][this.fallingBlock.xLeft] !== ".") { // reached another block
         this.fallingBlock = null;
       }
       else { // move down
-        this.board[this.fallingBlock.y][this.fallingBlock.x] = ".";
-        this.fallingBlock.y += 1;
-        this.board[this.fallingBlock.y][this.fallingBlock.x] = this.fallingBlock.value;
+        this.board[this.fallingBlock.yBot][this.fallingBlock.xLeft] = ".";
+        this.fallingBlock.yBot += 1;
+        this.board[this.fallingBlock.yBot][this.fallingBlock.xLeft] = this.fallingBlock.value;
       }
     }
   }
