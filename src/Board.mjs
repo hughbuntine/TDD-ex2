@@ -170,4 +170,8 @@ export class Board {
     console.log("move " + this.fallingBlock.type + " left");
     console.log(this.toString());
   }
+
+  moveRight(){
+    
+  }
 }
