@@ -172,6 +172,26 @@ export class Board {
   }
 
   moveRight(){
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
     
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = blockSize - 1; j >= 0; j--) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          
+          // Clear the cell
+          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+          
+          // Move the cell right
+          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j + 1] = shape[i][j];
+        }
+      }
+    }
+    // Update the falling block's position
+    this.fallingBlock.xLeft++;
+
+    console.log("move " + this.fallingBlock.type + " right");
+    console.log(this.toString());
   }
 }
