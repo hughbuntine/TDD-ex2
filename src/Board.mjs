@@ -53,20 +53,7 @@ export class Board {
 
   tick() {
     if (this.hasFalling()) {
-      if (this.atBottom()) { // reached the bottom
-        console.log(this.fallingBlock.type + " reached the bottom");
-        this.fallingBlock = null;
-        console.log(this.toString());
-      }
-      else if (this.onAnotherBlock()) { // reached another block
-        console.log(this.fallingBlock.type + " reached another block");
-        this.fallingBlock = null;
-        console.log(this.toString());
-      }
-      else { // move down
         this.moveDown();
-    }
-    
     }
   }
 
@@ -128,11 +115,13 @@ export class Board {
     if (this.atBottom()){
       console.log("cannot move "+ this.fallingBlock.type + " down");
       console.log(this.toString());
+      this.fallingBlock = null;
       return;
     }
     else if (this.onAnotherBlock()){
       console.log("cannot move "+ this.fallingBlock.type + " down");
       console.log(this.toString());
+      this.fallingBlock = null;
       return;
     }
 
