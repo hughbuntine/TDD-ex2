@@ -119,13 +119,13 @@ export class Board {
     }
 
     if (this.atBottom()){
-      console.log("cannot move "+ this.fallingBlock.type + " down");
+      console.log("cannot move "+ this.fallingBlock.type + " down, at bottom");
       console.log(this.toString());
       this.fallingBlock = null;
       return;
     }
     else if (this.onAnotherBlock()){
-      console.log("cannot move "+ this.fallingBlock.type + " down");
+      console.log("cannot move "+ this.fallingBlock.type + " down, on another block");
       console.log(this.toString());
       this.fallingBlock = null;
       return;

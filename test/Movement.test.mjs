@@ -97,10 +97,6 @@ describe("Moving tetrominoes", () => {
         board.moveDown();
         board.moveDown();
         board.moveDown();
-        board.moveDown();
-        board.moveDown();
-        board.moveDown();
-        board.moveDown();
 
         expect(board.toString()).to.equalShape(
             `..........
@@ -111,6 +107,33 @@ describe("Moving tetrominoes", () => {
              ...TTT....`
         );
 
+    });
+
+    test("it cannot be moved left into a filled cell", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.drop(Tetromino.T_SHAPE);
+        board.moveDown();
+        board.moveDown();
+        board.moveDown();
+        board.moveLeft();
+        board.moveLeft();
+
+        expect(board.toString()).to.equalShape(
+            `..........
+             ..........
+             ..........
+             ...T......
+             .TTTT.....
+             TTT.......`
+        );
     });
 
 });
