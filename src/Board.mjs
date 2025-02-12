@@ -149,6 +149,12 @@ export class Board {
   }
   
   moveLeft() {
+    if (this.fallingBlock.xLeft === 0) {
+      console.log("tried to move left but the block " + this.fallingBlock.type + " is at the left");
+      console.log(this.toString());
+      return; // The block is already at the left edge
+    }
+
     const blockSize = this.fallingBlock.size;
     const shape = this.fallingBlock.value.shape;
     
