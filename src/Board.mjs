@@ -270,4 +270,19 @@ export class Board {
     return true; // The block can move right
   }
 
+  rotateRight() {
+    
+  }
+
+  canRotateRight(){
+
+  }
+
+  rotateLeft() {
+
+  }
+
+  canRotateLeft() {
+
+  }
 }
