@@ -50,14 +50,12 @@ describe("Rotation of blocks", () => {
         board.moveLeft();
         board.moveLeft();
         dropToBottom(board);
-        console.log(board.toString());
 
         board.drop(Tetromino.T_SHAPE);
         board.moveRight();
         board.moveRight();
         board.moveRight();
         dropToBottom(board);
-        console.log(board.toString());
 
         board.drop(Tetromino.T_SHAPE);
         board.rotateRight();
@@ -66,13 +64,11 @@ describe("Rotation of blocks", () => {
         board.moveLeft();
         board.moveLeft();
         dropToBottom(board);
-        console.log(board.toString());
 
         board.drop(Tetromino.T_SHAPE);
         board.rotateRight();
         board.moveRight();
         dropToBottom(board);
-        console.log(board.toString());
 
         board.drop(Tetromino.T_SHAPE);
         board.rotateLeft();
@@ -81,12 +77,10 @@ describe("Rotation of blocks", () => {
         board.moveRight();
         board.moveRight();
         dropToBottom(board);
-        console.log(board.toString());
 
         board.drop(Tetromino.T_SHAPE);
         board.rotateLeft();
         dropToBottom(board);
-        console.log(board.toString());
        
 
         expect(board.toString()).to.equalShape(
@@ -97,6 +91,65 @@ describe("Rotation of blocks", () => {
              ........T
              T...TT.TT`
           );
+    });
+
+    test("when a line is full, it clears" , () => {
+        board.drop(Tetromino.T_SHAPE);
+        dropToBottom(board);
+        board.drop(Tetromino.T_SHAPE);
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
+        dropToBottom(board);
+        board.drop(Tetromino.T_SHAPE);
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
+        dropToBottom(board);
+
+        expect(board.score.getScore()).to.equal(40);
+    });
+
+    test("clears 2 lines at once" , () => {
+        
+        board.drop(Tetromino.T_SHAPE);
+        board.moveLeft();
+        board.moveLeft();
+        dropToBottom(board);
+
+        board.drop(Tetromino.T_SHAPE);
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
+        dropToBottom(board);
+
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateRight();
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
+        dropToBottom(board);
+
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateRight();
+        board.moveRight();
+        dropToBottom(board);
+
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateLeft();
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
+        board.moveRight();
+        dropToBottom(board);
+
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateLeft();
+        dropToBottom(board);
+       
+
+        expect(board.score.getScore()).to.equal(100);
     });
 
 });

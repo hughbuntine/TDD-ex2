@@ -1,16 +1,19 @@
 import { RotatingShape } from "./RotatingShape.mjs";
+import { Scoring } from "./Scoring.mjs";
 
 export class Board {
   width;
   height;
   board;
   fallingBlock;
+  score;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.board = new Array(height).fill().map(() => new Array(width).fill("."));
     this.fallingBlock = null
+    this.score = new Scoring();
   }
 
   toString() {
@@ -391,6 +394,7 @@ export class Board {
     if (rowsCleared > 0) {
       console.log("cleared " + rowsCleared + " rows");
     }
+    this.score.updateScore(rowsCleared);
     return rowsCleared;
   }
 }
