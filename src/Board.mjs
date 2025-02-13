@@ -1,3 +1,4 @@
+import { s } from "vitest/dist/reporters-O4LBziQ_";
 import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Board {
@@ -271,11 +272,47 @@ export class Board {
   }
 
   rotateRight() {
+    if (!this.hasFalling()) {
+      console.log("no block to rotate right");
+      console.log(this.toString());
+      return;
+    }
+
+    if (!this.canRotateRight()) {
+      console.log("cannot rotate "+ this.fallingBlock.type + " right");
+      console.log(this.toString());
+      return;
+    }
+
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    const rotatedShape = shape[0].map((_, i) => shape.map(row => row[i]).reverse());
     
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (shape[i][j] !== '.') { // Check if this cell is part of the block
+          
+            // Clear the cell
+            this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = ".";
+            
+            // Make it rotate right
+            this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = rotatedShape[i][j];
+        }
+        else if (shape[i][j] === '.' && this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] === ".") {
+          this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] = rotatedShape[i][j];
+        }
+      }
+    }
+    // Update the falling block's position
+    this.fallingBlock.value.shape = rotatedShape;
+
+    console.log("rotated " + this.fallingBlock.type + " right");
+    console.log(this.toString());
   }
 
   canRotateRight(){
-
+    return true; //for now
   }
 
   rotateLeft() {
