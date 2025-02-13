@@ -57,6 +57,9 @@ export class Board {
     if (this.hasFalling()) {
         this.moveDown();
     }
+    else {
+      this.clearRows();
+    }
   }
 
   hasFalling() {
@@ -374,5 +377,20 @@ export class Board {
       }
     }
     return true; // The block can rotate left
+  }
+
+  clearRows(){
+    let rowsCleared = 0;
+    for (let i = 0; i < this.height; i++) {
+      if (this.board[i].every(cell => cell !== ".")) {
+        this.board.splice(i, 1);
+        this.board.unshift(new Array(this.width).fill("."));
+        rowsCleared++;
+      }
+    }
+    if (rowsCleared > 0) {
+      console.log("cleared " + rowsCleared + " rows");
+    }
+    return rowsCleared;
   }
 }
