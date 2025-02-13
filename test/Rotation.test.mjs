@@ -52,5 +52,20 @@ describe("Rotation of blocks", () => {
         );
     });
 
+    test("a falling tetromino can be rotated left twice", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateLeft();
+        board.rotateLeft();
+
+        expect(board.toString()).to.equalShape(
+            `..........
+             ...TTT....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+        );
+    });
+
 
 });

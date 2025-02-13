@@ -43,7 +43,6 @@ export class Board {
       // Set the block attributes
       this.fallingBlock = {xLeft: Math.floor((this.width - blockSize) / 2), yTop: 0, value: JSON.parse(JSON.stringify(block)), size: blockSize, type: this.hasChar(block.shape)};
       console.log("drop " + this.fallingBlock.type);
-      console.log(this.toString());
     } 
     else {
       throw new Error("already falling");
@@ -117,19 +116,16 @@ export class Board {
   moveDown() {
     if (!this.hasFalling()) {
       console.log("no block to move down");
-      console.log(this.toString());
       return;
     }
 
     if (this.atBottom()){
       console.log("cannot move "+ this.fallingBlock.type + " down, at bottom");
-      console.log(this.toString());
       this.fallingBlock = null;
       return;
     }
     else if (this.onAnotherBlock()){
       console.log("cannot move "+ this.fallingBlock.type + " down, on another block");
-      console.log(this.toString());
       this.fallingBlock = null;
       return;
     }
@@ -154,19 +150,16 @@ export class Board {
     this.fallingBlock.yTop++;
 
     console.log(this.fallingBlock.type + " moved down");
-    console.log(this.toString());
   }
   
   moveLeft() {
     if (!this.hasFalling()) {
       console.log("no block to move left");
-      console.log(this.toString());
       return;
     }
 
     if (!this.canMoveLeft()) {
       console.log("cannot move "+ this.fallingBlock.type + " left");
-      console.log(this.toString());
       return;
     }
     const blockSize = this.fallingBlock.size;
@@ -190,19 +183,16 @@ export class Board {
     this.fallingBlock.xLeft--;
 
     console.log("move " + this.fallingBlock.type + " left");
-    console.log(this.toString());
   }
 
   moveRight() {
     if (!this.hasFalling()) {
       console.log("no block to move right");
-      console.log(this.toString());
       return;
     }
 
     if (!this.canMoveRight()) {
       console.log("cannot move "+ this.fallingBlock.type + " right");
-      console.log(this.toString());
       return;
     }
 
@@ -227,7 +217,6 @@ export class Board {
     this.fallingBlock.xLeft++;
 
     console.log("move " + this.fallingBlock.type + " right");
-    console.log(this.toString());
   }
 
   canMoveLeft(){
@@ -273,13 +262,11 @@ export class Board {
   rotateRight() {
     if (!this.hasFalling()) {
       console.log("no block to rotate right");
-      console.log(this.toString());
       return;
     }
 
     if (!this.canRotateRight()) {
       console.log("cannot rotate "+ this.fallingBlock.type + " right");
-      console.log(this.toString());
       return;
     }
 
@@ -307,7 +294,6 @@ export class Board {
     this.fallingBlock.value.shape = rotatedShape;
 
     console.log("rotated " + this.fallingBlock.type + " right");
-    console.log(this.toString());
   }
 
   canRotateRight(){
@@ -317,13 +303,11 @@ export class Board {
   rotateLeft() {
     if (!this.hasFalling()) {
       console.log("no block to rotate left");
-      console.log(this.toString());
       return;
     }
 
     if (!this.canRotateLeft()) {
       console.log("cannot rotate "+ this.fallingBlock.type + " left");
-      console.log(this.toString());
       return;
     }
 
@@ -331,7 +315,7 @@ export class Board {
     const shape = this.fallingBlock.value.shape;
     const rotatedShape1 = shape[0].map((_, i) => shape.map(row => row[i]).reverse());
     const rotatedShape2 = rotatedShape1[0].map((_, i) => rotatedShape1.map(row => row[i]).reverse());
-    const rotatedShape = rotatedShape2[0].map((_, i) => rotatedShape2.map(row => row[i]).reverse());
+    const rotatedShape = rotatedShape2[0].map((_, i) => rotatedShape2.map(row => row[i]).reverse()); // rotate right 3 times lol
 
     // Loop through each row of the shape starting from the bottom row
     for (let i = blockSize - 1; i >= 0; i--) {
@@ -353,7 +337,6 @@ export class Board {
     this.fallingBlock.value.shape = rotatedShape;
 
     console.log("rotated " + this.fallingBlock.type + " left");
-    console.log(this.toString());
   }
 
   canRotateLeft() {
