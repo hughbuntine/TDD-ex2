@@ -297,7 +297,23 @@ export class Board {
   }
 
   canRotateRight(){
-    return true; //for now
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    const rotatedShape = shape[0].map((_, i) => shape.map(row => row[i]).reverse());
+
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (rotatedShape[i][j] !== '.') { // Check if this cell is part of the block
+          if (shape[i][j] === '.') { // Check if this cell is part of the block
+            if (this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] !== '.') { // Check if this cell is already occupied
+              return false; // The block cannot rotate right
+            }}
+        }
+      }
+    }
+    return true; // The block can rotate right
+
   }
 
   rotateLeft() {
