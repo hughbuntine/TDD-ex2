@@ -82,7 +82,7 @@ describe("Rotation of blocks", () => {
         );
     });
 
-    test("a falling tetrinome cannot be rotated beyond the board", () => {
+    test("a falling tetrinome cannot be rotated beyond the board R", () => {
         board.drop(Tetromino.T_SHAPE);
         board.moveRight();
         board.moveRight();
@@ -96,6 +96,26 @@ describe("Rotation of blocks", () => {
             `.........T
              ........TT
              .........T
+             ..........
+             ..........
+             ..........`
+        );
+    });
+
+    test("a falling tetrinome cannot be rotated beyond the board L", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
+        board.moveLeft();
+        board.rotateRight();
+        board.moveLeft();
+        board.rotateLeft();
+
+        expect(board.toString()).to.equalShape(
+            `T.........
+             TT........
+             T.........
              ..........
              ..........
              ..........`

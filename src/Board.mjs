@@ -356,6 +356,23 @@ export class Board {
   }
 
   canRotateLeft() {
-    return true; //for now
+    const blockSize = this.fallingBlock.size;
+    const shape = this.fallingBlock.value.shape;
+    const rotatedShape1 = shape[0].map((_, i) => shape.map(row => row[i]).reverse());
+    const rotatedShape2 = rotatedShape1[0].map((_, i) => rotatedShape1.map(row => row[i]).reverse());
+    const rotatedShape = rotatedShape2[0].map((_, i) => rotatedShape2.map(row => row[i]).reverse()); // rotate right 3 times lol
+
+    // Loop through each row of the shape starting from the bottom row
+    for (let i = blockSize - 1; i >= 0; i--) {
+      for (let j = 0; j < blockSize; j++) {
+        if (rotatedShape[i][j] !== '.') { // Check if this cell is part of the block
+          if (shape[i][j] === '.') { // Check if this cell is part of the block
+            if (this.board[this.fallingBlock.yTop + i][this.fallingBlock.xLeft + j] !== '.') { // Check if this cell is already occupied
+              return false; // The block cannot rotate left
+            }}
+        }
+      }
+    }
+    return true; // The block can rotate left
   }
 }
