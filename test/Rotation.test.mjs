@@ -67,5 +67,20 @@ describe("Rotation of blocks", () => {
         );
     });
 
+    test("a falling tetromino can be rotated right and left", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateRight();
+        board.rotateLeft();
+
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ...TTT....
+             ..........
+             ..........
+             ..........
+             ..........`
+        );
+    });
+
 
 });
