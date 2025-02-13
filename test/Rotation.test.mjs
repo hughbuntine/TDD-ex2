@@ -9,7 +9,7 @@ describe("Rotation of blocks", () => {
         board = new Board(10, 6);
     });
 
-    test("a falling tetromino can be rotated", () => {
+    test("a falling tetromino can be rotated right", () => {
         board.drop(Tetromino.T_SHAPE);
         board.rotateRight();
 
@@ -22,5 +22,35 @@ describe("Rotation of blocks", () => {
              ..........`
         );
     });
+
+    test("a falling tetromino can be rotated right twice", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateRight();
+        board.rotateRight();
+
+        expect(board.toString()).to.equalShape(
+            `..........
+             ...TTT....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+        );
+    });
+
+    test("a falling tetromino can be rotated left", () => {
+        board.drop(Tetromino.T_SHAPE);
+        board.rotateLeft();
+
+        expect(board.toString()).to.equalShape(
+            `....T.....
+             ...TT.....
+             ....T.....
+             ..........
+             ..........
+             ..........`
+        );
+    });
+
 
 });
